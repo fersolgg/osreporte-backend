@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    osticket:
+      jdbc-url: jdbc:mysql://localhost:3306/osticket_test
+      username: fherrera
+      password: fherrera
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    reportes:
+      jdbc-url: jdbc:mysql://localhost:3306/osticket_reportes_test
+      username: fherrera
+      password: fherrera
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    osticket:
+      hibernate:
+        ddl-auto: none   # ¡PELIGRO! No tocar estructura
+      show-sql: true
+    reportes:
+      hibernate:
+        ddl-auto: update # Sí crea/modifica tablas de entidades de reportes
+      show-sql: true
+  messages:
+    basename: messages
