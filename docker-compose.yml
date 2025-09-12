@@ -1,0 +1,31 @@
+services:
+  # --- MySQL ---
+  mysql:
+    image: mysql:8.1
+    container_name: mysql_8
+    environment:
+      MYSQL_ROOT_PASSWORD: fherrera
+      MYSQL_DATABASE: fherrera
+      TZ: America/Santiago
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  # --- phpMyAdmin ---
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_4
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: fherrera
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+    restart: always
+
+volumes:
+  mysql_data:
