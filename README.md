@@ -26,9 +26,18 @@ http://localhost:80
 - **Usuario:** root
 - **Contraseña:** fherrera
 
-## 3. Creación de las bases de datos
+## 3. Creación del usuario y bases de datos
 
-En phpMyAdmin, crea las siguientes bases de datos:
+En phpMyAdmin, primero crea el usuario `fherrera` con contraseña `fherrera` y otórgale todos los privilegios sobre las bases de datos que usarás. Puedes hacerlo ejecutando el siguiente SQL desde la pestaña "SQL":
+
+```sql
+CREATE USER 'fherrera'@'%' IDENTIFIED BY 'fherrera';
+GRANT ALL PRIVILEGES ON osticket_test.* TO 'fherrera'@'%';
+GRANT ALL PRIVILEGES ON osticket_reportes_test.* TO 'fherrera'@'%';
+FLUSH PRIVILEGES;
+```
+
+Luego, crea las siguientes bases de datos:
 
 - `osticket_test`
 - `osticket_reportes_test`
@@ -38,10 +47,10 @@ En phpMyAdmin, crea las siguientes bases de datos:
 En la sección "Importar" de phpMyAdmin, selecciona la base de datos correspondiente y carga los scripts SQL:
 
 - Para la estructura principal de osticket:  
-  Importa el archivo `db/01_osticket_db.sql` en la base de datos `osticket_test`.
+  Importa el archivo `db/osticket/01_osticket_db.sql` en la base de datos `osticket_test`.
 
 - Para datos adicionales o de staff:  
-  Importa el archivo `db/02_ost_staf_data.sql` en la base de datos que corresponda (según instrucciones del proyecto).
+  Importa el archivo `db/osticket/02_ost_staf_data.sql` en la base de datos que corresponda (según instrucciones del proyecto).
 
 ## 5. Configuración de conexión en la aplicación
 
