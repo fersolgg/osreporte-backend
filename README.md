@@ -26,9 +26,16 @@ http://localhost:80
 - **Usuario:** root
 - **Contraseña:** fherrera
 
-## 3. Creación del usuario y bases de datos
+## 3. Creación de las bases de datos y usuario
 
-En phpMyAdmin, primero crea el usuario `fherrera` con contraseña `fherrera` y otórgale todos los privilegios sobre las bases de datos que usarás. Puedes hacerlo ejecutando el siguiente SQL desde la pestaña "SQL":
+Primero, crea las bases de datos con el encoding utf8mb3 y collation utf8mb3_general_ci. Puedes ejecutar el siguiente SQL desde la pestaña "SQL":
+
+```sql
+CREATE DATABASE osticket_test CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+CREATE DATABASE osticket_reportes_test CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+```
+
+Luego, crea el usuario `fherrera` con contraseña `fherrera` y otórgale todos los privilegios sobre las bases de datos creadas:
 
 ```sql
 CREATE USER 'fherrera'@'%' IDENTIFIED BY 'fherrera';
@@ -36,8 +43,6 @@ GRANT ALL PRIVILEGES ON osticket_test.* TO 'fherrera'@'%';
 GRANT ALL PRIVILEGES ON osticket_reportes_test.* TO 'fherrera'@'%';
 FLUSH PRIVILEGES;
 ```
-
-Luego, crea las siguientes bases de datos:
 
 - `osticket_test`
 - `osticket_reportes_test`
