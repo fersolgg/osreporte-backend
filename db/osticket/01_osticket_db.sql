@@ -249,7 +249,7 @@ CREATE TABLE `ost_email_account` (
   `last_error` datetime DEFAULT NULL,
   `last_activity` datetime DEFAULT NULL,
   `created` datetime NOT NULL,
-  `updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id`),
   KEY `email_id` (`email_id`),
   KEY `type` (`type`)
@@ -720,8 +720,8 @@ CREATE TABLE `ost_note` (
   `body` text DEFAULT NULL,
   `status` int(11) unsigned NOT NULL DEFAULT 0,
   `sort` int(11) unsigned NOT NULL DEFAULT 0,
-  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `created` timestamp NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `updated` timestamp NOT NULL DEFAULT '1970-01-01 00:00:00' ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `ext_id` (`ext_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;

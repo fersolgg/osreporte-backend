@@ -28,11 +28,11 @@ http://localhost:80
 
 ## 3. Creación de las bases de datos y usuario
 
-Primero, crea las bases de datos con el encoding utf8mb3 y collation utf8mb3_general_ci. Puedes ejecutar el siguiente SQL desde la pestaña "SQL":
+Primero, crea las bases de datos con el encoding utf8mb4 y collation utf8mb4_general_ci. Puedes ejecutar el siguiente SQL desde la pestaña "SQL":
 
 ```sql
-CREATE DATABASE osticket_test CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
-CREATE DATABASE osticket_reportes_test CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+CREATE DATABASE osticket_test CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE osticket_reportes_test CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
 Luego, crea el usuario `fherrera` con contraseña `fherrera` y otórgale todos los privilegios sobre las bases de datos creadas:
