@@ -1,4 +1,3 @@
-
 /**
  * Interfaz para servicios de reportes de osticket.
  * Provee métodos para obtener reportes de tickets por fecha y cantidad por tipo de actividad.
@@ -16,6 +15,8 @@ import java.util.List;
  *   <li>{@code getTicketsPorFecha}: Devuelve la cantidad de tickets creados agrupados por fecha.</li>
  *   <li>{@code getTipoActividadCantidad}: Devuelve la cantidad de tickets agrupados por tipo de actividad.</li>
  * </ul>
+ * Interfaz para los servicios relacionados con reportes de Osticket
+ * Define los métodos que deben implementar las clases de servicio
  */
 public interface OsticketService {
    
