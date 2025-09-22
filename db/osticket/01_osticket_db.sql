@@ -720,8 +720,8 @@ CREATE TABLE `ost_note` (
   `body` text DEFAULT NULL,
   `status` int(11) unsigned NOT NULL DEFAULT 0,
   `sort` int(11) unsigned NOT NULL DEFAULT 0,
-  `created` timestamp NOT NULL DEFAULT '1970-01-01 00:00:00',
-  `updated` timestamp NOT NULL DEFAULT '1970-01-01 00:00:00' ON UPDATE current_timestamp(),
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `ext_id` (`ext_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
