@@ -1,11 +1,16 @@
+# Archivo de configuración principal de Spring Boot
+# Aquí se definen las conexiones a las bases de datos, propiedades JPA y mensajes
+
 spring:
   datasource:
     osticket:
+      # Configuración de la base de datos osticket
       jdbc-url: jdbc:mysql://localhost:3306/osticket_test
       username: fherrera
       password: fherrera
       driver-class-name: com.mysql.cj.jdbc.Driver
     reportes:
+      # Configuración de la base de datos de reportes
       jdbc-url: jdbc:mysql://localhost:3306/osticket_reportes_test
       username: fherrera
       password: fherrera
@@ -22,3 +27,5 @@ spring:
       show-sql: true
   messages:
     basename: messages
+
+# Fin de configuración

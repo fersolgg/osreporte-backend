@@ -1,12 +1,19 @@
+// DTO (Data Transfer Object) para representar información de staff filtrada por estado
 package com.tuxpan.soportesw.osreporte_backend.osticket.dto;
 
 public class StaffPorEstadoDTO {
+    // Identificador único del staff
     private Long staffId;
+    // Nombre de usuario del staff
     private String username;
+    // Nombre del staff
     private String firstname;
+    // Apellido del staff
     private String lastname;
+    // Correo electrónico del staff
     private String email;
 
+    // Constructor para inicializar todos los campos
     public StaffPorEstadoDTO(Long staffId, String username, String firstname, String lastname, String email) {
         this.staffId = staffId;
         this.username = username;
@@ -15,6 +22,7 @@ public class StaffPorEstadoDTO {
         this.email = email;
     }
 
+    // Métodos getter y setter para cada campo
     public Long getStaffId() { return staffId; }
     public void setStaffId(Long staffId) { this.staffId = staffId; }
     public String getUsername() { return username; }
