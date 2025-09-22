@@ -49,13 +49,21 @@ FLUSH PRIVILEGES;
 
 ## 4. Cargar la estructura de la base de datos
 
-En la sección "Importar" de phpMyAdmin, selecciona la base de datos correspondiente y carga los scripts SQL:
 
-- Para la estructura principal de osticket:  
-  Importa el archivo `db/osticket/01_osticket_db.sql` en la base de datos `osticket_test`.
+En la sección "Importar" de phpMyAdmin, selecciona la base de datos correspondiente y carga los siguientes archivos SQL en este orden:
 
-- Para datos adicionales o de staff:  
-  Importa el archivo `db/osticket/02_ost_staf_data.sql` en la base de datos que corresponda (según instrucciones del proyecto).
+1. En la base de datos `osticket_test`:
+   - `db/osticket/01_osticket_db.sql` (estructura principal)
+   - `db/osticket/02_ost_staf_data.sql` (datos de staff)
+   - `db/osticket/03_ost_ticket_status_data.sql` (estados de tickets)
+   - `db/osticket/04_ost_form_field_data.sql` (campos de formularios)
+   - `db/osticket/05_ost_ticket_data.sql` (datos de tickets)
+   - `db/osticket/06_ost_form_entry_data.sql` (entradas de formularios)
+   - `db/osticket/07_ost_form_entry_values_data.sql` (valores de formularios)
+   - `db/osticket/08_ost_thread_data.sql` (datos de hilos)
+   - `db/osticket/09_ost_thread_entry_data.sql` (entradas de hilos)
+
+Importa cada archivo en el orden indicado para asegurar la correcta relación de los datos.
 
 ## 5. Configuración de conexión en la aplicación
 
