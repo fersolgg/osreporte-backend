@@ -4,6 +4,7 @@ package com.tuxpan.soportesw.osreporte_backend.osticket.services;
 // Importaciones de DTO, repositorio y utilidades de Spring
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.repositories.OsticketQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,14 @@ public class OsticketServiceImpl implements OsticketService {
         }
         return lista;
     }
+    // Implementación para obtener el reporte de tickets por estado en un rango de fechas
+@Override
+public List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, String fechaFin) {
+    List<Object[]> resultados = osticketQueryRepository.getTicketsPorEstado(fechaInicio, fechaFin);
+    List<TicketsPorEstadoDTO> lista = new ArrayList<>();
+    for (Object[] fila : resultados) {
+        // fila[0] = estado, fila[1] = cantidad
+        lista.add(new TicketsPorEstadoDTO(fila[0].toString(), ((Number)fila[1]).longValue()));
+    }
+    return lista;
 }
