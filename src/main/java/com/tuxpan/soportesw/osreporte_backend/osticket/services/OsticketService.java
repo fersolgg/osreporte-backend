@@ -31,6 +31,6 @@ public interface OsticketService {
     List<StaffPorEstadoDTO> listadoStaffPorEstado(int estado);
     // Obtiene el reporte de tickets creados por día en un rango de fechas
 List<TicketsPorDiaDTO> obtenerTicketsCreadosPorDia(String fechaInicio, String fechaFin);
-// Obtiene el reporte de tickets por estado en un rango de fechas
+// Obtiene el reporte de tickets por estado en un rango de fechas 
 List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, String fechaFin);
 }
