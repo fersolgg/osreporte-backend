@@ -3,6 +3,7 @@ package com.tuxpan.soportesw.osreporte_backend.controller;
 
 // Importaciones de clases DTO, servicios y utilidades
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.services.OsticketService;
 import com.tuxpan.soportesw.osreporte_backend.utils.MessageUtil;
 import com.tuxpan.soportesw.osreporte_backend.utils.ApiResponse;
@@ -39,4 +40,12 @@ public class OsticketController {
         // Retorna la respuesta API con los datos y el mensaje
         return new ApiResponse<>(data, msg, null);
     }
+      // Endpoint REST para consultar el reporte de tickets creados por día en un rango de fechas
+    @GetMapping("/reportes/tickets-por-dia")
+    public List<TicketsPorDiaDTO> getTicketsPorDia(
+            @RequestParam String fechaInicio,
+            @RequestParam String fechaFin) {
+        return service.obtenerTicketsCreadosPorDia(fechaInicio, fechaFin);
+    }
+
 }
