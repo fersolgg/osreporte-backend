@@ -29,5 +29,16 @@ public class OsticketQueryRepository {
         // Ejecuta la consulta y retorna los resultados como lista de arreglos de objetos
         return entityManager.createNativeQuery(sql).getResultList();
     }
-
+        // Consulta nativa para reporte de tickets creados por día en un rango de fechas
+        // Recibe dos parámetros tipo String con el rango de fechas (formato 'YYYY-MM-DD HH:MM:SS')
+        // Retorna una lista de arreglos de objetos: [fecha, cantidad de tickets]
+        public List<Object[]> getTicketsCreadosPorDia(String fechaInicio, String fechaFin) {
+            String sql = "SELECT DATE(t.created) AS fecha, COUNT(*) AS tickets_creados "
+                       + "FROM ost_ticket t "
+                       + "WHERE t.created BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' "
+                       + "GROUP BY DATE(t.created) "
+                       + "ORDER BY fecha";
+            // Ejecuta la consulta y retorna los resultados como lista de arreglos de objetos
+            return entityManager.createNativeQuery(sql).getResultList();
+        }
 }
