@@ -6,6 +6,7 @@ package com.tuxpan.soportesw.osreporte_backend.osticket.services;
 
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface OsticketService {
     List<StaffPorEstadoDTO> listadoStaffPorEstado(int estado);
     // Obtiene el reporte de tickets creados por día en un rango de fechas
 List<TicketsPorDiaDTO> obtenerTicketsCreadosPorDia(String fechaInicio, String fechaFin);
+// Obtiene el reporte de tickets por estado en un rango de fechas
+List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, String fechaFin);
 }
