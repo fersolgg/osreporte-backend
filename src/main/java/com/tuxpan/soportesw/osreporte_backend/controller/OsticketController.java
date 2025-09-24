@@ -5,6 +5,7 @@ package com.tuxpan.soportesw.osreporte_backend.controller;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.services.OsticketService;
 import com.tuxpan.soportesw.osreporte_backend.utils.MessageUtil;
 import com.tuxpan.soportesw.osreporte_backend.utils.ApiResponse;
@@ -56,5 +57,13 @@ public class OsticketController {
             @RequestParam String fechaFin) {
         return service.obtenerTicketsPorEstado(fechaInicio, fechaFin);
     }
+
+        // Endpoint REST para consultar el reporte de tickets por tipo de actividad en un rango de fechas
+        @GetMapping("/reportes/tickets-por-tipo-actividad")
+        public List<TicketsPorTipoActividadDTO> getTicketsPorTipoActividad(
+                @RequestParam String fechaInicio,
+                @RequestParam String fechaFin) {
+            return service.obtenerTicketsPorTipoActividad(fechaInicio, fechaFin);
+        }
 
 }
