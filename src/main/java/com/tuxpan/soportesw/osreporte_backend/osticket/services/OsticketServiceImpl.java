@@ -5,6 +5,7 @@ package com.tuxpan.soportesw.osreporte_backend.osticket.services;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.repositories.OsticketQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,4 +61,19 @@ public List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, Str
     }
     return lista;
 }
+        // Implementación para obtener el reporte de tickets por tipo de actividad en un rango de fechas
+        @Override
+        @Transactional(transactionManager = "osticketTransactionManager", readOnly = true)
+        public List<TicketsPorTipoActividadDTO> obtenerTicketsPorTipoActividad(String fechaInicio, String fechaFin) {
+            List<Object[]> resultados = osticketQueryRepository.getTicketsPorTipoActividad(fechaInicio, fechaFin);
+            List<TicketsPorTipoActividadDTO> lista = new ArrayList<>();
+            for (Object[] fila : resultados) {
+                // fila[0] = tipo_actividad, fila[1] = cantidad
+                lista.add(new TicketsPorTipoActividadDTO(
+                    fila[0] != null ? fila[0].toString() : "Sin tipo",
+                    fila[1] != null ? ((Number)fila[1]).longValue() : 0L
+                ));
+            }
+            return lista;
+        }
 }
