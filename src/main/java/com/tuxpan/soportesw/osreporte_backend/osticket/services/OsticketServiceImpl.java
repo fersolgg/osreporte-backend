@@ -68,12 +68,31 @@ public List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, Str
             List<Object[]> resultados = osticketQueryRepository.getTicketsPorTipoActividad(fechaInicio, fechaFin);
             List<TicketsPorTipoActividadDTO> lista = new ArrayList<>();
             for (Object[] fila : resultados) {
-                // fila[0] = tipo_actividad, fila[1] = cantidad
+                String tipoRaw = fila[0] != null ? fila[0].toString() : "Sin tipo";
+                String tipoLimpio = limpiarTipoActividad(tipoRaw);
                 lista.add(new TicketsPorTipoActividadDTO(
-                    fila[0] != null ? fila[0].toString() : "Sin tipo",
+                    tipoLimpio,
                     fila[1] != null ? ((Number)fila[1]).longValue() : 0L
                 ));
             }
             return lista;
+        }
+
+        // Función para limpiar el nombre del tipo de actividad
+        private String limpiarTipoActividad(String tipoActividad) {
+            if (tipoActividad == null || tipoActividad.equals("Sin tipo")) {
+                return "Sin tipo";
+            }
+            // Si el string tiene formato JSON, extrae el valor
+            if (tipoActividad.contains(":") && tipoActividad.contains("{")) {
+                int idx = tipoActividad.indexOf(":");
+                int end = tipoActividad.indexOf("}", idx);
+                if (idx > 0 && end > idx) {
+                    String valor = tipoActividad.substring(idx + 2, end).replace("\"", "").trim();
+                    return valor;
+                }
+            }
+            return tipoActividad;
+        }
         }
 }
