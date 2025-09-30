@@ -6,6 +6,7 @@ import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorMesDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.services.OsticketService;
 import com.tuxpan.soportesw.osreporte_backend.utils.MessageUtil;
 import com.tuxpan.soportesw.osreporte_backend.utils.ApiResponse;
@@ -64,6 +65,14 @@ public class OsticketController {
                 @RequestParam String fechaInicio,
                 @RequestParam String fechaFin) {
             return service.obtenerTicketsPorTipoActividad(fechaInicio, fechaFin);
+        }
+
+        // Endpoint REST para consultar el reporte de tickets por mes en un rango de fechas
+        @GetMapping("/reportes/tickets-por-mes")
+        public List<TicketsPorMesDTO> getTicketsPorMes(
+                @RequestParam String fechaInicio,
+                @RequestParam String fechaFin) {
+            return service.obtenerTicketsPorMes(fechaInicio, fechaFin);
         }
 
 }
