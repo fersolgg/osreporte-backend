@@ -6,6 +6,7 @@ import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorMesDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.repositories.OsticketQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,18 @@ public List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, Str
                     tipoLimpio,
                     fila[1] != null ? ((Number)fila[1]).longValue() : 0L
                 ));
+            }
+            return lista;
+        }
+        // Implementación para obtener el reporte de tickets por mes en un rango de fechas
+        @Override
+        @Transactional(transactionManager = "osticketTransactionManager", readOnly = true)
+        public List<TicketsPorMesDTO> obtenerTicketsPorMes(String fechaInicio, String fechaFin) {
+            List<Object[]> resultados = osticketQueryRepository.getTicketsCreadosPorMes(fechaInicio, fechaFin);
+            List<TicketsPorMesDTO> lista = new ArrayList<>();
+            for (Object[] fila : resultados) {
+                // fila[0] = mes, fila[1] = cantidad de tickets
+                lista.add(new TicketsPorMesDTO(fila[0].toString(), ((Number)fila[1]).longValue()));
             }
             return lista;
         }
