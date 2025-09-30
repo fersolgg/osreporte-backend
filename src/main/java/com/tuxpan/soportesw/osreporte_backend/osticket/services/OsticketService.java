@@ -7,6 +7,7 @@ package com.tuxpan.soportesw.osreporte_backend.osticket.services;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorMesDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
 
 import java.util.List;
@@ -36,4 +37,6 @@ List<TicketsPorDiaDTO> obtenerTicketsCreadosPorDia(String fechaInicio, String fe
 List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, String fechaFin);
 // Obtiene el reporte de tickets por tipo de actividad en un rango de fechas
 List<TicketsPorTipoActividadDTO> obtenerTicketsPorTipoActividad(String fechaInicio, String fechaFin);
+// Obtiene el reporte de tickets creados por mes en un rango de fechas
+List<TicketsPorMesDTO> obtenerTicketsPorMes(String fechaInicio, String fechaFin);
 }
