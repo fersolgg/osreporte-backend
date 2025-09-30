@@ -68,4 +68,14 @@ public class OsticketQueryRepository {
                 "ORDER BY cantidad DESC";
         return entityManager.createNativeQuery(sql).getResultList();
     }
+    
+    // Método para obtener tickets agrupados por mes
+    public List<Object[]> getTicketsCreadosPorMes(String fechaInicio, String fechaFin) {
+        String sql = "SELECT DATE_FORMAT(t.created, '%Y-%m') AS mes, COUNT(*) AS tickets_creados "
+                   + "FROM ost_ticket t "
+                   + "WHERE t.created BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' "
+                   + "GROUP BY DATE_FORMAT(t.created, '%Y-%m') "
+                   + "ORDER BY mes";
+        return entityManager.createNativeQuery(sql).getResultList();
+    }
 }
