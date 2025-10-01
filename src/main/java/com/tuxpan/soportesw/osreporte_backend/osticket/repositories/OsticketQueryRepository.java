@@ -78,4 +78,14 @@ public class OsticketQueryRepository {
                    + "ORDER BY mes";
         return entityManager.createNativeQuery(sql).getResultList();
     }
+    
+    // Método para obtener tickets agrupados por año
+    public List<Object[]> getTicketsCreadosPorAno(String fechaInicio, String fechaFin) {
+        String sql = "SELECT YEAR(t.created) AS ano, COUNT(*) AS tickets_creados "
+                   + "FROM ost_ticket t "
+                   + "WHERE t.created BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' "
+                   + "GROUP BY YEAR(t.created) "
+                   + "ORDER BY ano";
+        return entityManager.createNativeQuery(sql).getResultList();
+    }
 }
