@@ -3,6 +3,7 @@ package com.tuxpan.soportesw.osreporte_backend.controller;
 
 // Importaciones de clases DTO, servicios y utilidades
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorAnoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
@@ -73,6 +74,14 @@ public class OsticketController {
                 @RequestParam String fechaInicio,
                 @RequestParam String fechaFin) {
             return service.obtenerTicketsPorMes(fechaInicio, fechaFin);
+        }
+
+        // Endpoint REST para consultar el reporte de tickets por año en un rango de fechas
+        @GetMapping("/reportes/tickets-por-año")
+        public List<TicketsPorAnoDTO> getTicketsPorAno(
+                @RequestParam String fechaInicio,
+                @RequestParam String fechaFin) {
+            return service.obtenerTicketsPorAno(fechaInicio, fechaFin);
         }
 
 }
