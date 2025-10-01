@@ -3,6 +3,7 @@ package com.tuxpan.soportesw.osreporte_backend.osticket.services;
 
 // Importaciones de DTO, repositorio y utilidades de Spring
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.StaffPorEstadoDTO;
+import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorAnoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorDiaDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorEstadoDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorTipoActividadDTO;
@@ -87,6 +88,19 @@ public List<TicketsPorEstadoDTO> obtenerTicketsPorEstado(String fechaInicio, Str
             for (Object[] fila : resultados) {
                 // fila[0] = mes, fila[1] = cantidad de tickets
                 lista.add(new TicketsPorMesDTO(fila[0].toString(), ((Number)fila[1]).longValue()));
+            }
+            return lista;
+        }
+        
+        // Implementación para obtener el reporte de tickets por año en un rango de fechas
+        @Override
+        @Transactional(transactionManager = "osticketTransactionManager", readOnly = true)
+        public List<TicketsPorAnoDTO> obtenerTicketsPorAno(String fechaInicio, String fechaFin) {
+            List<Object[]> resultados = osticketQueryRepository.getTicketsCreadosPorAno(fechaInicio, fechaFin);
+            List<TicketsPorAnoDTO> lista = new ArrayList<>();
+            for (Object[] fila : resultados) {
+                // fila[0] = año, fila[1] = cantidad de tickets
+                lista.add(new TicketsPorAnoDTO(fila[0].toString(), ((Number)fila[1]).longValue()));
             }
             return lista;
         }
