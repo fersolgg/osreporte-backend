@@ -53,19 +53,19 @@ public class OsticketQueryRepository {
     }
     // Consulta nativa para reporte de tickets por tipo de actividad en un rango de fechas
     public List<Object[]> getTicketsPorTipoActividad(String fechaInicio, String fechaFin) {
-        String sql = "SELECT " +
-                   "    CASE " +
-                   "        WHEN t.source = 'Web' THEN 'Consulta Web' " +
-                   "        WHEN t.source = 'Email' THEN 'Consulta Email' " +
-                   "        WHEN t.source = 'Phone' THEN 'Consulta Telefónica' " +
-                   "        WHEN t.source = 'API' THEN 'Integración API' " +
-                   "        ELSE CONCAT('Otros: ', t.source) " +
-                   "    END AS tipo_actividad, " +
-                   "    COUNT(*) AS cantidad " +
-                   "FROM ost_ticket t " +
-                   "WHERE t.created BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' " +
-                   "GROUP BY t.source " +
-                   "ORDER BY cantidad DESC";
+        String sql = "SELECT "
+                   + "CASE "
+                   + "    WHEN t.source = 'Web' THEN 'Consulta Web' "
+                   + "    WHEN t.source = 'Email' THEN 'Consulta Email' "
+                   + "    WHEN t.source = 'Phone' THEN 'Consulta Telefónica' "
+                   + "    WHEN t.source = 'API' THEN 'Integración API' "
+                   + "    ELSE CONCAT('Otros: ', t.source) "
+                   + "END AS tipo_actividad, "
+                   + "COUNT(*) AS cantidad "
+                   + "FROM ost_ticket t "
+                   + "WHERE t.created BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "' "
+                   + "GROUP BY t.source "
+                   + "ORDER BY cantidad DESC";
         return entityManager.createNativeQuery(sql).getResultList();
     }
     
