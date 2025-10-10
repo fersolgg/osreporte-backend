@@ -1,9 +1,94 @@
-/* styles.css - Estilos personalizados para el dashboard */
 
+/*
+    styles.css - Paleta y estilos OSTicket/TUXPAN
+    Este archivo define los colores, bordes y estilos visuales para que el dashboard se vea igual al sistema real.
+*/
+
+/* Fondo general y tipografía del dashboard */
 body {
-    background-color: #f8f9fa;
+    background: #f5f6f7; /* Color de fondo principal del sistema */
+    color: #222222;      /* Color de texto principal */
+    font-family: 'Inter', system-ui, Arial, sans-serif; /* Tipografía moderna y legible */
 }
 
-h1 {
-    color: #0d6efd;
+/* Tarjetas y contenedores principales del dashboard */
+.card {
+    background: #fff; /* Fondo blanco para tarjetas y cajas */
+    border: 1px solid #e6e6e6; /* Borde gris claro para separar visualmente */
+    border-radius: 8px; /* Bordes redondeados suaves */
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07); /* Sombra sutil para dar profundidad */
+}
+
+/* Píldora roja para KPI de tickets cerrados */
+.kpi-pill-red {
+    background: #fdecec; /* Fondo rojo claro */
+    color: #c62828;      /* Texto rojo intenso */
+    border-radius: 10px;
+    padding: .25rem .5rem;
+    font-weight: 600;
+}
+
+/* Menú OSTicket: enlaces principales */
+.nav-ost a {
+    color: #222222; /* Color de texto normal */
+}
+.nav-ost a.disabled {
+    color: #9aa0a6; /* Gris para deshabilitados */
+    pointer-events: none; /* No clickeable */
+}
+
+/* Submenú de tickets (abierto, mis tickets, cerrado, etc.) */
+.menu-sub .btn-link {
+    text-decoration: none;
+    color: #222222;
+}
+.menu-sub .btn-link.disabled {
+    color: #9aa0a6;
+    pointer-events: none;
+}
+
+/* Puntos de leyenda para gráficos (verde, rojo, naranjo) */
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: .5rem;
+    vertical-align: middle;
+}
+.dot-green { background: #2e7d32; }   /* Verde para abierto */
+.dot-red { background: #c62828; }     /* Rojo para cerrado */
+.dot-orange { background: #ef6c00; }  /* Naranjo para en progreso */
+
+/* Botón Exportar: estilo outline gris */
+.btn-outline-secondary {
+    --bs-btn-hover-bg: #e9ecef;
+}
+
+/* KPIs principales del dashboard */
+#kpi-open { color: #2e7d32; }         /* Verde para abiertos */
+#kpi-closed { color: #c62828; }       /* Rojo para cerrados */
+#kpi-avg-time { color: #222222; }     /* Negro para tiempo promedio */
+#kpi-total-hours { color: #6b6b6b; }  /* Gris para horas del período */
+
+/* Tablas y gráficos: fondo blanco, bordes y sombra */
+canvas, table {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(44,62,80,0.05);
+}
+
+/* Badges de estado en la tabla de agentes */
+.badge.text-bg-success { background-color: #2e7d32 !important; } /* Productivo */
+.badge.text-bg-secondary { background-color: #e6e6e6 !important; color: #222 !important; } /* Eficiente */
+.badge.text-bg-warning { background-color: #ef6c00 !important; color: #fff !important; } /* Casos complejos */
+.badge.text-bg-danger { background-color: #c62828 !important; }
+
+/* Botones y menús decorativos (solo visuales, no funcionales) */
+.btn.disabled, .btn-outline-secondary.disabled, .btn-link.disabled {
+    color: #9aa0a6 !important; /* Gris claro para indicar que está deshabilitado */
+    background-color: #e6e6e6 !important;
+    border-color: #e6e6e6 !important;
+    pointer-events: none;
+    opacity: 0.7;
 }
