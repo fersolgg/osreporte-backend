@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <!-- Gráfica de tickets por estado -->
+        <!-- Gráfica de tickets por estado (barras) -->
         <div class="row mb-4">
             <div class="col-md-8">
                 <div class="card p-3">
@@ -61,6 +61,15 @@
                     <div><span class="legend-dot dot-green"></span>Abierto</div>
                     <div><span class="legend-dot dot-red"></span>Cerrado</div>
                     <div><span class="legend-dot dot-orange"></span>En Progreso</div>
+                </div>
+            </div>
+        </div>
+        <!-- Gráfica de tickets por estado (torta) -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-3">Tickets por Estado (Torta)</h5>
+                    <canvas id="chart-tickets-pie" height="120"></canvas>
                 </div>
             </div>
         </div>
