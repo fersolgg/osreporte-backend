@@ -33,4 +33,30 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Gráfico de torta (pie chart) usando Chart.js y datos simulados
+    const ctxPie = document.getElementById('chart-tickets-pie').getContext('2d');
+    const labelsPie = ['Abierto', 'Cerrado', 'En Progreso'];
+    const dataPie = [60, 30, 10]; // Porcentajes de ejemplo
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: labelsPie,
+            datasets: [{
+                data: dataPie,
+                backgroundColor: [
+                    '#2e7d32', // Verde
+                    '#c62828', // Rojo
+                    '#ef6c00'  // Naranja
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: { display: false }
+            }
+        }
+    });
 });
