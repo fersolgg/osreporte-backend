@@ -59,4 +59,42 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // =============================
+    // Llenar KPIs dinámicamente
+    // =============================
+    // Datos simulados para KPIs
+    const kpiData = {
+        totalTickets: 25,
+        ticketsAbiertos: 12,
+        ticketsCerrados: 8,
+        ticketsEnProgreso: 5
+    };
+    // Asignar valores a los KPIs
+    document.getElementById('kpi-total').textContent = kpiData.totalTickets;
+    document.getElementById('kpi-abiertos').textContent = kpiData.ticketsAbiertos;
+    document.getElementById('kpi-cerrados').textContent = kpiData.ticketsCerrados;
+    document.getElementById('kpi-progreso').textContent = kpiData.ticketsEnProgreso;
+
+    // ============================
+   // Llenar tabla de agentes dinámicamente
+    // =============================
+    // Datos simulados para agentes
+    const agentes = [
+        { nombre: 'Juan Pérez', tickets: 7, estado: 'Activo' },
+        { nombre: 'Ana López', tickets: 5, estado: 'Inactivo' },
+        { nombre: 'Carlos Ruiz', tickets: 8, estado: 'Activo' },
+        { nombre: 'María Torres', tickets: 5, estado: 'Activo' }
+    ];
+    const tbody = document.getElementById('tabla-agentes-body');
+    tbody.innerHTML = '';
+    agentes.forEach(agente => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${agente.nombre}</td>
+            <td>${agente.tickets}</td>
+            <td><span class="badge ${agente.estado === 'Activo' ? 'bg-success' : 'bg-secondary'}">${agente.estado}</span></td>
+        `;
+        tbody.appendChild(tr);
+    });
 });
