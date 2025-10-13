@@ -2,7 +2,32 @@
 /*
     styles.css - Paleta y estilos OSTicket/TUXPAN
     Este archivo define los colores, bordes y estilos visuales para que el dashboard se vea igual al sistema real.
+
+    Paleta de colores corporativa:
+    - Verde éxito: #2e7d32
+    - Rojo alerta: #c62828
+    - Naranja: #ef6c00
+    - Azul principal: #0d6efd (solo para detalles mínimos)
+    - Gris claro: #e6e6e6
+    - Fondo general: #f5f6f7
+    - Texto principal: #222222
 */
+/* ===================== Filtros visuales (inputs y selects) ===================== */
+input[type="text"], select {
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    font-size: 1rem;
+    background: #fff;
+    color: #222222;
+    margin-right: 0.5rem;
+    transition: border-color 0.2s;
+}
+input[type="text"]:focus, select:focus {
+    border-color: #0d6efd;
+    outline: none;
+}
+
 
 /* Fondo general y tipografía del dashboard */
 body {
@@ -60,9 +85,14 @@ body {
 .dot-red { background: #c62828; }     /* Rojo para cerrado */
 .dot-orange { background: #ef6c00; }  /* Naranjo para en progreso */
 
-/* Botón Exportar: estilo outline gris */
+/* Botón Exportar: estilo outline gris y efecto hover */
 .btn-outline-secondary {
     --bs-btn-hover-bg: #e9ecef;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+    background: #e6e6e6 !important;
+    color: #222 !important;
 }
 
 /* KPIs principales del dashboard */
@@ -91,4 +121,10 @@ canvas, table {
     border-color: #e6e6e6 !important;
     pointer-events: none;
     opacity: 0.7;
+}
+
+/* Efecto hover/focus para botones decorativos (aunque sean solo visuales) */
+.btn:not(.disabled):hover, .btn:not(.disabled):focus {
+    filter: brightness(0.97);
+    box-shadow: 0 2px 8px rgba(44,62,80,0.10);
 }
