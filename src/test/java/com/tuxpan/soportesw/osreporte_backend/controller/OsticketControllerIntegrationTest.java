@@ -41,7 +41,8 @@ public class OsticketControllerIntegrationTest {
         em.createNativeQuery("INSERT INTO ost_ticket (id, created, status_id, source) VALUES (2, '2025-07-10 12:30:00', 1, 'Phone')").executeUpdate();
 
         // Llamar al repo directamente (el controlador ya formatea fechas hacia el service/repo)
-        List<Object[]> raw = repo.getTicketsCreadosPorDia("2025-07-01 00:00:00", "2025-07-31 23:59:59");
+    // Usar rango real observado en la BD: 2025-06-02 .. 2025-09-22
+    List<Object[]> raw = repo.getTicketsCreadosPorDia("2025-06-01 00:00:00", "2025-09-22 23:59:59");
 
         assertNotNull(raw);
         assertFalse(raw.isEmpty(), "Debe retornar al menos un día con conteo");
