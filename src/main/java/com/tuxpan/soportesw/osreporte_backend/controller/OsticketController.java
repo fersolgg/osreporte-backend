@@ -11,10 +11,15 @@ import com.tuxpan.soportesw.osreporte_backend.osticket.dto.TicketsPorMesDTO;
 import com.tuxpan.soportesw.osreporte_backend.osticket.services.OsticketService;
 import com.tuxpan.soportesw.osreporte_backend.utils.MessageUtil;
 import com.tuxpan.soportesw.osreporte_backend.utils.ApiResponse;
+import com.tuxpan.soportesw.osreporte_backend.utils.DateRangeResult;
+import com.tuxpan.soportesw.osreporte_backend.utils.DateRangeUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import java.util.List;
 
 // Indica que esta clase es un controlador REST de Spring
@@ -49,7 +54,15 @@ public class OsticketController {
     public List<TicketsPorDiaDTO> getTicketsPorDia(
             @RequestParam String fechaInicio,
             @RequestParam String fechaFin) {
-        return service.obtenerTicketsCreadosPorDia(fechaInicio, fechaFin);
+        try {
+            DateRangeResult dr = DateRangeUtil.parseAndValidate(fechaInicio, fechaFin, null);
+            // Pasamos los valores en formato Timestamp 'yyyy-MM-dd HH:mm:ss' que usan los repositorios
+            String from = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getStartInstant());
+            String to = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getEndInstant());
+            return service.obtenerTicketsCreadosPorDia(from, to);
+        } catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+        }
     }
 
     // Endpoint REST para consultar el reporte de tickets por estado en un rango de fechas
@@ -57,7 +70,14 @@ public class OsticketController {
     public List<TicketsPorEstadoDTO> getTicketsPorEstado(
             @RequestParam String fechaInicio,
             @RequestParam String fechaFin) {
-        return service.obtenerTicketsPorEstado(fechaInicio, fechaFin);
+        try {
+            DateRangeResult dr = DateRangeUtil.parseAndValidate(fechaInicio, fechaFin, null);
+            String from = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getStartInstant());
+            String to = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getEndInstant());
+            return service.obtenerTicketsPorEstado(from, to);
+        } catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+        }
     }
 
         // Endpoint REST para consultar el reporte de tickets por tipo de actividad en un rango de fechas
@@ -65,7 +85,14 @@ public class OsticketController {
         public List<TicketsPorTipoActividadDTO> getTicketsPorTipoActividad(
                 @RequestParam String fechaInicio,
                 @RequestParam String fechaFin) {
-            return service.obtenerTicketsPorTipoActividad(fechaInicio, fechaFin);
+            try {
+                DateRangeResult dr = DateRangeUtil.parseAndValidate(fechaInicio, fechaFin, null);
+                String from = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getStartInstant());
+                String to = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getEndInstant());
+                return service.obtenerTicketsPorTipoActividad(from, to);
+            } catch (IllegalArgumentException ex) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            }
         }
 
         // Endpoint REST para consultar el reporte de tickets por mes en un rango de fechas
@@ -73,7 +100,14 @@ public class OsticketController {
         public List<TicketsPorMesDTO> getTicketsPorMes(
                 @RequestParam String fechaInicio,
                 @RequestParam String fechaFin) {
-            return service.obtenerTicketsPorMes(fechaInicio, fechaFin);
+            try {
+                DateRangeResult dr = DateRangeUtil.parseAndValidate(fechaInicio, fechaFin, null);
+                String from = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getStartInstant());
+                String to = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getEndInstant());
+                return service.obtenerTicketsPorMes(from, to);
+            } catch (IllegalArgumentException ex) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            }
         }
 
         // Endpoint REST para consultar el reporte de tickets por año en un rango de fechas
@@ -81,7 +115,14 @@ public class OsticketController {
         public List<TicketsPorAnoDTO> getTicketsPorAno(
                 @RequestParam String fechaInicio,
                 @RequestParam String fechaFin) {
-            return service.obtenerTicketsPorAno(fechaInicio, fechaFin);
+            try {
+                DateRangeResult dr = DateRangeUtil.parseAndValidate(fechaInicio, fechaFin, null);
+                String from = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getStartInstant());
+                String to = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(dr.getZone()).format(dr.getEndInstant());
+                return service.obtenerTicketsPorAno(from, to);
+            } catch (IllegalArgumentException ex) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            }
         }
 
 }
