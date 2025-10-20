@@ -42,6 +42,11 @@ public class OsticketController {
     // Endpoint GET para obtener el listado de staff por estado
     @GetMapping("/listado-staff-por-estado")
     public ApiResponse<List<StaffPorEstadoDTO>> listadoStaffPorEstado(@RequestParam int estado) {
+        // Validación del parámetro: solo se aceptan 0 (inactivo) o 1 (activo)
+        if (estado != 0 && estado != 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parámetro 'estado' inválido. Use 0 o 1.");
+        }
+
         // Llama al servicio para obtener los datos filtrados por estado
         List<StaffPorEstadoDTO> data = service.listadoStaffPorEstado(estado);
         // Obtiene el mensaje de éxito
