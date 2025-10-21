@@ -7,6 +7,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tuxpan.soportesw.osreporte_backend.osticket.repositories.OsticketQueryRepository;
@@ -28,14 +30,23 @@ public class OsticketTicketsPorMesIntegrationTest {
     @Test
     @Transactional(transactionManager = "osticketTransactionManager")
     public void reportTicketsPorMes_countsByMonth() {
-        // Limpiar y crear esquema mínimo
-        em.createNativeQuery("DROP TABLE IF EXISTS ost_ticket").executeUpdate();
-        em.createNativeQuery("DROP TABLE IF EXISTS ost_ticket_status").executeUpdate();
+        // Ejecutar fixtures SQL idempotente desde src/test/resources/fixtures.sql
+        try (InputStream in = getClass().getResourceAsStream("/fixtures.sql")) {
+            if (in == null) {
+                throw new IllegalStateException("fixtures.sql no encontrado en classpath");
+            }
+            String sql = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+            for (String stmt : sql.split(";")) {
+                stmt = stmt.trim();
+                if (!stmt.isEmpty()) {
+                    em.createNativeQuery(stmt).executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error ejecutando fixtures.sql", e);
+        }
 
-        em.createNativeQuery("CREATE TABLE ost_ticket_status (id INT PRIMARY KEY, name VARCHAR(100))").executeUpdate();
-        em.createNativeQuery("CREATE TABLE ost_ticket (id INT PRIMARY KEY, created TIMESTAMP, status_id INT, source VARCHAR(50))").executeUpdate();
-
-        // Insertar tickets en distintos meses
+        // Insertar tickets en distintos meses (datos del caso de prueba)
         em.createNativeQuery("INSERT INTO ost_ticket (id, created, status_id, source) VALUES (1, '2025-06-10 09:00:00', 1, 'Web')").executeUpdate();
         em.createNativeQuery("INSERT INTO ost_ticket (id, created, status_id, source) VALUES (2, '2025-07-05 10:00:00', 1, 'Email')").executeUpdate();
         em.createNativeQuery("INSERT INTO ost_ticket (id, created, status_id, source) VALUES (3, '2025-07-15 11:00:00', 1, 'Phone')").executeUpdate();
