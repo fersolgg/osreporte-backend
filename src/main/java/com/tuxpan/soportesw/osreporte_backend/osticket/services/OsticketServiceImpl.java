@@ -44,13 +44,7 @@ public class OsticketServiceImpl implements OsticketService {
     @Override
     @Transactional(transactionManager = "osticketTransactionManager", readOnly = true)
     public List<TicketsPorDiaDTO> obtenerTicketsCreadosPorDia(String fechaInicio, String fechaFin) {
-        List<Object[]> resultados = osticketQueryRepository.getTicketsCreadosPorDia(fechaInicio, fechaFin);
-        List<TicketsPorDiaDTO> lista = new ArrayList<>();
-        for (Object[] fila : resultados) {
-            // fila[0] = fecha, fila[1] = cantidad de tickets
-            lista.add(new TicketsPorDiaDTO(fila[0].toString(), ((Number)fila[1]).longValue()));
-        }
-        return lista;
+        return osticketQueryRepository.getTicketsCreadosPorDia(fechaInicio, fechaFin);
     }
     // Implementación para obtener el reporte de tickets por estado en un rango de fechas
 @Override
