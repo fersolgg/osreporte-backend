@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuración Maven para el proyecto OSReporte Backend -->
+<!-- Sistema de reportes para OSTicket desarrollado como parte de la tesis -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- Configuración base de Spring Boot -->
+	<!-- Seleccioné la versión 3.5.5 por ser la más estable disponible -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<!-- Información del proyecto -->
 	<groupId>com.tuxpan.soportesw</groupId>
 	<artifactId>osreporte-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -26,43 +32,69 @@
 		<tag/>
 		<url/>
 	</scm>
+	
+	<!-- Configuración de Java -->
+	<!-- Uso Java 21 LTS para mejor rendimiento y características modernas -->
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+	
+	<!-- Dependencias del proyecto -->
+	<!-- Estas librerías son necesarias para el funcionamiento del backend -->
 	<dependencies>
+		<!-- Spring Boot JPA para manejo de base de datos -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
+		<!-- Jakarta Persistence API para compatibilidad -->
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+		
+		<!-- Spring Boot Web para crear los endpoints REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!-- DevTools para reinicio automático durante desarrollo -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- Conector MySQL para conectar con la base de datos OSTicket -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- Dependencias para testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- H2 in-memory database for integration tests -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
+	<!-- Configuración de construcción -->
 	<build>
 		<plugins>
+			<!-- Plugin principal de Spring Boot para empaquetar la aplicación -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

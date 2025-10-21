@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    osticket:
+      jdbc-url: jdbc:h2:mem:osticket_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+    reportes:
+      jdbc-url: jdbc:h2:mem:reportes_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
