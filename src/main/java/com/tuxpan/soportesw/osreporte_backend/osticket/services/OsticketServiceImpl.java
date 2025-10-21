@@ -17,14 +17,6 @@ public class OsticketServiceImpl implements OsticketService {
         @Override
         @Transactional(transactionManager = "osticketTransactionManager", readOnly = true)
         public List<StaffPorEstadoDTO> listadoStaffPorEstado(int estado) {
-                List<Object[]> resultados = osticketQueryRepository.listadoStaffPorEstado(estado);
-                return resultados.stream()
-                                .map(obj -> new StaffPorEstadoDTO(
-                                                obj[0] != null ? Long.valueOf(obj[0].toString()) : null,
-                                                obj[1] != null ? obj[1].toString() : null,
-                                                obj[2] != null ? obj[2].toString() : null,
-                                                obj[3] != null ? obj[3].toString() : null,
-                                                obj[4] != null ? obj[4].toString() : null))
-                                .collect(Collectors.toList());
+                return osticketQueryRepository.listadoStaffPorEstado(estado);
         }
 }
