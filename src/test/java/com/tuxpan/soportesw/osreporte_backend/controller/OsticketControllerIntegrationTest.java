@@ -9,6 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -28,12 +30,21 @@ public class OsticketControllerIntegrationTest {
     @Test
     @Transactional(transactionManager = "osticketTransactionManager")
     public void reportTicketsPorDia_returnsDailyCounts() {
-        // Limpiar y crear esquema mínimo
-        em.createNativeQuery("DROP TABLE IF EXISTS ost_ticket").executeUpdate();
-        em.createNativeQuery("DROP TABLE IF EXISTS ost_ticket_status").executeUpdate();
-
-        em.createNativeQuery("CREATE TABLE ost_ticket_status (id INT PRIMARY KEY, name VARCHAR(100))").executeUpdate();
-        em.createNativeQuery("CREATE TABLE ost_ticket (id INT PRIMARY KEY, created TIMESTAMP, status_id INT, source VARCHAR(50))").executeUpdate();
+        // Ejecutar fixtures SQL idempotente desde src/test/resources/fixtures.sql
+        try (InputStream in = getClass().getResourceAsStream("/fixtures.sql")) {
+            if (in == null) {
+                throw new IllegalStateException("fixtures.sql no encontrado en classpath");
+            }
+            String sql = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+            for (String stmt : sql.split(";")) {
+                stmt = stmt.trim();
+                if (!stmt.isEmpty()) {
+                    em.createNativeQuery(stmt).executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error ejecutando fixtures.sql", e);
+        }
 
         // Insertar datos de ejemplo
         em.createNativeQuery("INSERT INTO ost_ticket_status (id, name) VALUES (1, 'Open')").executeUpdate();
